@@ -6,14 +6,13 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
-var authenticate = require('./routes/auth')(passport);
+
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
 var api = require('./routes/api');
-var auth = require('./routes/auth')
-
+var auth = require('./routes/auth')(passport);
 
 var app = express();
 

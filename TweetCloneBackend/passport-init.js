@@ -47,7 +47,9 @@ module.exports = function(passport){
                 return cb(null,false,{message: 'Invalid user ID'});
             }
 
-            return(null,records[username]);
+            console.log('Authentication successfull for user :'+records[username].username);
+
+            return cb(null,records[username]);
 
 
 		}
@@ -59,13 +61,15 @@ module.exports = function(passport){
 		function(req, username, password, cb) {
 
         //	return cb('we have not implemented this', false);
-            
+            console.log('passed username :' + username);
+            console.log('passed password :' + password);
              // implement custom logic to validate if user is existing or not 
-              if (records[username].username == username)
+              if (records[username])
               {
                   console.log('user already existing with name' + username);
                   return cb(null,false,{message: 'user already existing'});
               }
+              
 
               // If not existing then store the username and hash value of password 
               records[username] = {
