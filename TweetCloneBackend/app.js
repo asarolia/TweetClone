@@ -4,8 +4,20 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+// import session for persistent sessions on authentication
 var session = require('express-session');
+// import passport for implementing API authentication
 var passport = require('passport');
+
+//Initialize mongoose schemas by importing here
+require('./models/postmodel')
+require('./models/usermodel')
+// Initialize and get the database object
+var db = require('./models/database');
+
+// open the connection
+db.open();
+
 
 
 // var indexRouter = require('./routes/index');
@@ -54,6 +66,7 @@ initPassport(passport);
 app.use('/api', api);
 app.use('/auth', auth);
 
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -69,5 +82,16 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+// close db connection 
+// app.use(function (req, res, next) {
+  
+//   res.on('close', db.close());
+
+//   next();
+
+// });
+
 
 module.exports = app;

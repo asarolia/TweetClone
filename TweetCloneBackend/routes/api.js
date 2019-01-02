@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+// import mongoose and our post model
+var mongoose = require('mongoose');
+var Post =  mongoose.model('Post');
 
 // /* GET home page. */
 // router.get('/api', function(req, res, next) {
@@ -37,13 +40,47 @@ router.route('/posts')
 	.post(function(req, res){
 
 		//TODO create a new post in the database
-		res.send({message:"TODO create a new post in the database"});
+		//res.send({message:"TODO create a new post in the database"});
+
+		// Create document in MongoDB collection 
+	
+		var post = new Post();
+		post.tweetText = req.body.text;
+		post.created_By = req.body.created_By;
+		//post.created_By = req.session.passport.user.id;
+
+		// here we are assuming that db/collection already
+		post.save(function(err,post){
+
+			if (err){
+				// if error then return 500
+				res.send(500,err);
+
+			}
+			console.log("Inserted one post successfully");
+			return res.json(post);
+		});
+		
+
+
 	})
 
 	.get(function(req, res){
 
 		//TODO get all the posts in the database
-		res.send({message:"TODO get all the posts in the database"});
+	//	res.send({message:"TODO get all the posts in the database"});
+
+		// Get all the posts from the MongoDB collection
+		
+
+		Post.find(function(err,posts){
+			if (err){
+				res.send(500,err);
+			}
+			console.log("Retrieved all posts successfully");
+			res.json(posts);
+		});
+
 	})
 	
 //api for a specfic post
