@@ -9,12 +9,12 @@ myModule.config(function($routeProvider){
         controller: 'tweethandle'
       })
       //the login display
-      .when('/login/', {
+      .when('/login', {
         templateUrl: 'loginpartial.html',
         controller: 'authhandle'
       })
       //the signup display
-      .when('/register/', {
+      .when('/register', {
         templateUrl: 'registerpartial.html',
         controller: 'authhandle'
       });
