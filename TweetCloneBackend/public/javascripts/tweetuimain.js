@@ -1,4 +1,21 @@
-var myModule = angular.module('TweetCloneUI',['ngRoute']);
+var myModule = angular.module('TweetCloneUI',['ngRoute']).run(function($rootScope, $http){
+    // all controllers only has access to there specific scope but they also has access to root scope
+    // we are adding root scope as dependency here to set or maintain certain varibales at global level to 
+    // be accessed from anywhere
+
+    $rootScope.authenticated = false;
+    $rootScope.current_user = {};
+
+// Implement logout 
+
+$rootScope.signout = function(){
+    $http.get('auth/signout');
+    $rootScope.authenticated = false;
+    $rootScope.current_user = '';
+  };
+
+
+});
 
 // declare application routes to pick partial views 
 myModule.config(function($routeProvider){
@@ -42,7 +59,7 @@ myModule.controller('tweethandle',function($scope){
 
 });
 
-myModule.controller('authhandle', function($scope){
+myModule.controller('authhandle', function($scope,$rootScope,$http,$location){
 
     $scope.user = {username:'',password:''};
     $scope.errmsg = '';
@@ -50,15 +67,47 @@ myModule.controller('authhandle', function($scope){
     // register function
     $scope.register = function(){
 
-        $scope.errmsg = "Registration successfull for " + $scope.user.username;
+        // placeholder message , to be implemented later
+        //$scope.errmsg = "Registration successfull for " + $scope.user.username;
+
+        $http.post('/auth/signup',$scope.user).then(function(resp){
+                if(resp.data.state == 'success')
+                {
+                    $rootScope.authenticated = true;
+                    $rootScope.current_user = resp.data.user.username;
+                    $location.path('/');
+                }else{
+                    $scope.errmsg = resp.data.message;        
+                }
+                
+        },function(resp){
+            $scope.errmsg = resp.data.message;
+
+        });
 
     }
 
     // login function
     $scope.login = function(){
 
+       // Display placeholder message 
+      //  $scope.errmsg = "Login successfull for " + $scope.user.username;
+
+      $http.post('/auth/login',$scope.user).then(function(resp){
+        if(resp.data.state == 'success')
+        {
+            $rootScope.authenticated = true;
+            $rootScope.current_user = resp.data.user.username;
+            $location.path('/');
+        }else{
+            $scope.errmsg = resp.data.message;        
+        }
         
-        $scope.errmsg = "Login successfull for " + $scope.user.username;
+        },function(resp){
+            $scope.errmsg = resp.data.message;
+
+        });
+
 
     }
 
