@@ -20,9 +20,11 @@ db.open();
 
 
 
-// var indexRouter = require('./routes/index');
+// added to server our UI files 
+ var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
+// added for API endpoint routes
 var api = require('./routes/api');
 var auth = require('./routes/auth')(passport);
 
@@ -62,6 +64,10 @@ initPassport(passport);
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
+// add routing for TweetClone UI SPA base page 
+app.use('/',indexRouter);
+
+// add routing for Tweetclone backend API
 
 app.use('/api', api);
 app.use('/auth', auth);

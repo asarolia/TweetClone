@@ -16,7 +16,7 @@
 </head>
 <body ng-app="TweetCloneUI">
 
-  <div ng-controller="tweethandle">
+  <div ng-controller="authhandle">
         <!-- Image and text -->
     <nav class="navbar sticky-top navbar-light bg-light">
         <a class="navbar-brand" href="#">
@@ -27,50 +27,25 @@
         <a class="nav justify-content-end" href="#"> SignUp </a> -->
         <ul class="nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link active" href="./login.html">Login</a>
+            <a class="nav-link active" href="./main.html">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="./register.html">SignUp</a>
-          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link active" href="#">SignUp</a>
+          </li> -->
         </ul>
     </nav>
     <div  class = "container">
         <div>
-            <form ng-submit="postData()">
-              <div class="form-group myform">
-                  <input type="text" class="form-control" placeholder="Your Name" id="createdBy" ng-model="newPost.createdBy"/>
-    
-              </div>
-              <div class="form-group">
-                  <textarea rows=2 class="form-control" placeholder="Say something!" id="tweetText" ng-model="newPost.tweetText"></textarea>
-              </div>  
-    
-              <button type="submit" class="btn btn-primary">Tweet</button>
-    
+            <form class="form-auth myform" ng-submit="register()">
+                <h2>Register</h2>
+                <p class="text-warning">{{errmsg}}</p>
+                <input type="username" ng-model="user.username" placeholder="Username" class="form-control"><br>
+                <input type="password" ng-model="user.password" placeholder="Password" class="form-control"><br>
+                <button type="submit" class="btn btn-primary">Register</button>
             </form>
         </div>
         <br/>
-        <div id="TweetPost">
-    
-            <h4>My Tweet Feed</h4>
-            <!-- <div class="post" ng-repeat="post in posts | orderBy:'createdAt':true" ng-class-odd="'odd'" ng-class-even="'even'"> 
-              <p>{{post.tweetText}}</p>
-            <small>Posted by @{{post.createdBy}}</small>
-            <small class="pull-right">{{post.createdAt | date:"h:mma 'on' MMM d, y"}}</small>
-            </div> -->
-    
-            <!-- Added bootstarp card layout for tweet display -->
-            <div class="card" ng-repeat="post in posts | orderBy:'createdAt':true" ng-class-odd="'odd'" ng-class-even="'even'">
-                <div class="card-body">
-                  <h5 class="card-title">@{{post.createdBy}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{post.createdAt | date:"h:mma 'on' MMM d, y"}}</h6>
-                  <p class="card-text">{{post.tweetText}}</p>
-                  <a href="#" class="card-link">Retweet</a>
-                  <a href="#" class="card-link">Comment</a>
-                </div>
-              </div>
-    
-          </div>   
+       
     
     </div>
 
