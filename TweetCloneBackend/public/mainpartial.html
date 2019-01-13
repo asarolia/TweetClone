@@ -1,4 +1,4 @@
-        <div>
+        <!-- <div>
             <form ng-submit="postData()">
               <div class="form-group myform">
                   <input type="text" class="form-control" placeholder="Your Name" id="createdBy" ng-model="newPost.createdBy"/>
@@ -27,5 +27,88 @@
                 </div>
               </div>
     
-          </div>   
+          </div>    -->
+<!-- Below layout will render using CSS grid-->
+
+          <div class="grid-container">
+            <div class="grid-item">
+                <div id="cardone">
+                    <div class="cardtitle">
+                        <img src="./images/tweetlogo.png" alt="profile pic"/>
+                        <div>
+                                <h3>Abhishek Sarolia</h3>
+                                <h4>@{{ current_user }}</h4>
+                        </div>
+                        
+                        <hr>
+    
+                    </div>
+                    <div class="cardtext">
+                            <p>Dummy text to represent the card content.
+                                    This content can be replaced with specific text.
+                            </p>
+                    </div>
+                    <div class="cardfooter">
+                        <a href="www.google.com" target="_blank">More Info</a>
+    
+                    </div>
+    
+                </div>
+            </div>
+            <div class="grid-item">
+                    <div>
+                            <form ng-submit="postData()">
+                              <div class="form-group myform">
+                                  <input type="text" class="form-control" placeholder="Your Name" id="createdBy" ng-model="newPost.createdBy"/>
+                    
+                              </div>
+                              <div class="form-group">
+                                  <textarea rows=2 class="form-control" placeholder="Say something!" id="tweetText" ng-model="newPost.tweetText"></textarea>
+                              </div>  
+                    
+                              <button type="submit" class="btn btn-primary">Tweet</button>
+                    
+                            </form>
+                        </div>
+                        <br/>
+                        <div id="TweetPost">
+                    
+                            <h4>My Tweet Feed</h4>
+                           
+                            <div class="card" ng-repeat="post in posts | orderBy:'createdAt':true" ng-class-odd="'odd'" ng-class-even="'even'">
+                                <div class="card-body">
+                                  <h5 class="card-title">@{{post.createdBy}}</h5>
+                                  <h6 class="card-subtitle mb-2 text-muted">{{post.createdAt | date:"h:mma 'on' MMM d, y"}}</h6>
+                                  <p class="card-text">{{post.tweetText}}</p>
+                                  <a href="#" class="card-link">Retweet</a>
+                                  <a href="#" class="card-link">Comment</a>
+                                </div>
+                              </div>
+                    
+                          </div>
+
+            </div>
+                
+          
+            <div class="grid-item">
+                <div id="cardone">
+                    <div class="cardtitle">
+                        <h4> Who to follow </h4>
+                        <hr>
+    
+                    </div>
+                    <div class="cardtext">
+                            <p>Dummy text to represent the card content.
+                                    This content can be replaced with specific text.
+                            </p>
+                    </div>
+                    <div class="cardfooter">
+                        <a href="www.google.com" target="_blank">More Info</a>
+    
+                    </div>
+    
+                </div>
+            </div>
+                    
+        </div>
     

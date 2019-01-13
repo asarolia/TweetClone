@@ -6,7 +6,12 @@ var router = express.Router();
 
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'TweetClone' });
+// below will render view from views directory using jade template file with same name
+ // res.render('index', { title: 'TweetClone' });
+
+ // We want to serve our own angular html pages from public folder henceusing res.sendfile() 
+ //res.senfile('./public/index.html');
+ res.sendfile('./public/indexcard.html');
 });
 
 module.exports = router;

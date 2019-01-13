@@ -1,4 +1,6 @@
 var createError = require('http-errors');
+// import environmnet file for configurations 
+require('dotenv').config();
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -20,7 +22,7 @@ db.open();
 
 
 
-// added to server our UI files 
+// added to serve our UI files 
  var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
@@ -31,6 +33,7 @@ var auth = require('./routes/auth')(passport);
 var app = express();
 
 // view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -40,7 +43,10 @@ app.use(logger('dev'));
 // best practice is to keep the below secret in some environmnet variable outside code 
 // but for time being we will go with this
 app.use(session({
-secret : 'My super duper secret key'
+// Load secret key for password encryption from environmnet file 
+  //secret : 'My super duper secret key'
+  secret : process.env.SECRET_KEY
+
 }));
 
 
@@ -49,6 +55,7 @@ secret : 'My super duper secret key'
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Add passport as middleware at the end of middleware chain

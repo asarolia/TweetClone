@@ -14,3 +14,25 @@ Body{
 .myform{
   padding-top:2%;
 }
+.grid-container{
+  display: grid;
+  gap: 5px 5px;
+  grid-template-columns: 30% 50% 20%;
+/* display:flex;
+flex-direction: row; */
+margin:1.5%;
+}
+
+#cardone, #cardtwo, #cardthree {
+  border: 1px solid #ccc;
+  background-color:white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19);
+  border-radius:10px;
+  margin:5px;
+}
+
+.cardtitle{
+  justify-content: center;
+  display:flex;
+
+}

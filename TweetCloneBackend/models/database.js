@@ -1,5 +1,7 @@
 // import mongoose ODM for MongoDB
 var mongoose = require('mongoose');
+// import environmnet file via dotenv
+require('dotenv').config();
 
 // define DB connnection constants
 

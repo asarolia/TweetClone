@@ -19,9 +19,21 @@ $rootScope.signout = function(){
 
 // declare application routes to pick partial views 
 myModule.config(function($routeProvider){
-    $routeProvider
+
+    
+        $routeProvider
       //the timeline display
-      .when('/', {
+    //   .when('/', {
+    //     templateUrl: 'mainpartial.html',
+    //     controller: 'tweethandle'
+    //   })
+    // display authentication page by default
+    .when('/', {
+        templateUrl: 'loginpartial.html',
+        controller: 'authhandle'
+      })
+      //the timeline display
+      .when('/main', {
         templateUrl: 'mainpartial.html',
         controller: 'tweethandle'
       })
@@ -35,6 +47,8 @@ myModule.config(function($routeProvider){
         templateUrl: 'registerpartial.html',
         controller: 'authhandle'
       });
+
+    
   });
 
 myModule.controller('tweethandle',function($scope){
@@ -75,7 +89,9 @@ myModule.controller('authhandle', function($scope,$rootScope,$http,$location){
                 {
                     $rootScope.authenticated = true;
                     $rootScope.current_user = resp.data.user.username;
-                    $location.path('/');
+                    // route to main instead of default root
+                    // $location.path('/');
+                    $location.path('/main');
                 }else{
                     $scope.errmsg = resp.data.message;        
                 }
@@ -98,7 +114,9 @@ myModule.controller('authhandle', function($scope,$rootScope,$http,$location){
         {
             $rootScope.authenticated = true;
             $rootScope.current_user = resp.data.user.username;
-            $location.path('/');
+            // route to main instead of default root
+            // $location.path('/');
+            $location.path('/main');
         }else{
             $scope.errmsg = resp.data.message;        
         }
