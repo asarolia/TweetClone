@@ -51,19 +51,68 @@ myModule.config(function($routeProvider){
     
   });
 
-myModule.controller('tweethandle',function($scope){
+// define a custom service for basic read from DB, this service can then be instantiated via DI whenever needed 
+myModule.factory('postService', function($http){
+        var baseUrl = "/api/posts";
+        var factory = {};
+        // below function will fetch all posts from API
+        factory.getAllTweets = function(){
+            return $http.get(baseUrl);
+        };
+
+        // below function will add post in DB via API
+        factory.postTweet = function(tweetdata){
+            return $http.post(baseUrl,tweetdata);
+        };
+
+
+        return factory;
+    });
+
+// add 
+myModule.controller('tweethandle',function($scope, $rootScope, postService){
+
 
     $scope.posts = [];
-
     $scope.newPost = {createdBy:'',tweetText:'',createdAt:''};
 
+
+
+  //used for basic read from json
+	postService.getAllTweets().then(function(response){
+        console.log("data received from get api");
+		$scope.posts = response.data;
+	});
+
+   
     $scope.postData = function(){
+        $scope.newPost.createdBy = $rootScope.current_user;
 
         $scope.newPost.createdAt = new Date();
         
        // $scope.posts.push($scope.newPost.createdBy + ' says ' + $scope.newPost.tweetText + ' at ' + $scope.newPost.createdAt);
        
-       $scope.posts.push($scope.newPost);
+       // Instead of pushing into local array, push the data to API
+       //$scope.posts.push($scope.newPost);
+       // success call back function 
+    //    var handleSuccessCB = function(response,status){
+    //        console.log("successfully posted");
+
+    //    };
+        postService.postTweet($scope.newPost).then(function(response,status){
+            console.log("successfully posted");
+ 
+        },function(response){
+            console.log("post eror");
+        });
+
+          //used for basic read from json
+        postService.getAllTweets().then(function(response){
+            console.log("fresh data received from get api");
+            $scope.posts = response.data;
+        },function(response){
+            console.log("fresh data fetch after post failed");
+        });
 
         $scope.newPost = {createdBy:'',tweetText:'',createdAt:''};
 

@@ -45,8 +45,9 @@ router.route('/posts')
 		// Create document in MongoDB collection 
 	
 		var post = new Post();
-		post.tweetText = req.body.text;
-		post.created_By = req.body.created_By;
+		post.tweetText = req.body.tweetText;
+		post.created_By = req.body.createdBy;
+		post.created_At = req.body.createdAt;
 		//post.created_By = req.session.passport.user.id;
 
 		// here we are assuming that db/collection already
