@@ -2,11 +2,24 @@
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 } */
+/* 
+.fixed-nav{
+ position: fixed;
+ top: 0px;
+ width:100%;
+}
+*/
+.contentbox{
+  margin-top :5%;
+} 
 
 a {
   color: #00B7FF;
 }
 
+.navcolor{
+  background-color: rgba(138, 203, 219, 0.952);
+}
 Body{
   background-color: aliceblue;
 }
@@ -17,7 +30,7 @@ Body{
 .grid-container{
   display: grid;
   gap: 5px 5px;
-  grid-template-columns: 30% 50% 20%;
+  grid-template-columns: 3fr 5fr 2fr;
 /* display:flex;
 flex-direction: row; */
 margin:1.5%;
@@ -29,6 +42,7 @@ margin:1.5%;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19);
   border-radius:10px;
   margin:5px;
+  padding:2%;
 }
 
 .cardtitle{
@@ -36,3 +50,17 @@ margin:1.5%;
   display:flex;
 
 }
+
+.cardfooter{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding:10px;
+}
+
+.cfoot{
+  justify-content: center;
+}
+
+/* .item3{
+  grid-area:2/1/3/2;
+} */

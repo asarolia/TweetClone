@@ -16,10 +16,10 @@
 </head>
 <body ng-app="TweetCloneUI">
     <div>
-        <nav class="navbar sticky-top navbar-light bg-light">
+        <nav class="navbar navbar-light fixed-top navcolor">
             <a class="navbar-brand" href="#">
               <img src="./images/tweetlogo.png" width="30" height="30" class="d-inline-block align-top" alt="" >
-              TwitterClone-Angular
+              TwitterClone
             </a>
             <!-- <a class="nav justify-content-end" href="#"> Login </a>
             <a class="nav justify-content-end" href="#"> SignUp </a> -->
@@ -40,7 +40,7 @@
         </nav>
     </div>
     <!-- Below layout will be used before authentication-->
-    <div  class = "container" ng-hide="authenticated">
+    <div  class = "container contentbox" ng-hide="authenticated">
         <div class="col-md-offset-2 col-md-8">
                 <div ng-view>
   
@@ -50,7 +50,7 @@
                   
     </div>
     <!-- below will be used post authentication -->
-    <div ng-show="authenticated">
+    <div class="contentbox" ng-show="authenticated">
             <div ng-view>
   
             </div>          
